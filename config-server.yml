@@ -22,7 +22,7 @@ spring:
 com:
  patient:
    service:
-    uri: http://localhost:8080/patient
+    uri: http://localhost:8080/patients
     name: patient-service 
  vitalsign:
    service:
