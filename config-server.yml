@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
+    url: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&autoReconnect=true
     username: root
-    password: ideas2it
+    password: ${MYSQL_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
@@ -31,4 +31,4 @@ com:
  vitalsign:
    service:
     uri: http://localhost:8082/vitalsign
-    name: vitalsign-service 
+    name: vitalsign-service
