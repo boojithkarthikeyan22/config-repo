@@ -1,4 +1,10 @@
 spring:
+  cloud:
+    consul:
+     host : consul
+     port : 8500
+     config : 
+      enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql_db:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
