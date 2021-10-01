@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql_db:3306/${MYSQL_DATABASE}?createDatabaseIfNotExist=true&autoReconnect=true
+    url: jdbc:mysql://mysql_db:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
     username: root
-    password: ${MYSQL_PASSWORD}
+    password: ideas2it
   jpa:
     show-sql: true
     hibernate:
