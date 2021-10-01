@@ -36,5 +36,5 @@ com:
     name: user-service
  vitalsign:
    service:
-    uri: http://localhost:8082/vitalsign
+    uri: http://vitalsign:8082/vitalsign
     name: vitalsign-service
