@@ -7,7 +7,8 @@ spring:
       enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql_db:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
+#    url: jdbc:mysql://mysql_db:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/ideas2it?createDatabaseIfNotExist=true&autoReconnect=true
     username: root
     password: ideas2it
   jpa:
@@ -37,4 +38,8 @@ com:
  vitalsign:
    service:
     uri: http://vitalsign:8082/vitalsign
+    name: vitalsign-service
+ schedule:
+   service:
+    uri: http://localhost:8082/vitalsign
     name: vitalsign-service
