@@ -1,0 +1,85 @@
+version: "3"
+services:
+  config:
+    image: config-server
+    networks:
+      - healthcare-network
+    ports:
+      - "8888:8888"
+  patient:
+    image: patient-service
+    ports:
+      - "8080:8080"
+    networks:
+      - healthcare-network 
+    depends_on:
+      - config
+      - consul
+      - mysql_db
+      - elasticsearch
+      - mongo
+      - redis-server
+  vitalsign:
+    image: vitalsign-service
+    ports:
+      - "8082:8082"
+    networks:
+      - healthcare-network 
+    depends_on:
+      - config
+      - patient
+  user:
+    image: user-service
+    ports:
+      - "8081:8081"
+    networks:
+      - healthcare-network 
+    depends_on:
+      - config
+      - patient
+  consul:
+    image: consul:latest
+    command: agent -server -ui -node=server1 -bootstrap-expect=1 -client=0.0.0.0
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    networks:
+      - healthcare-network
+  elasticsearch:
+    image: elasticsearch:7.6.2
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - healthcare-network    
+  mysql_db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3307:3306
+    networks:
+      - healthcare-network
+    environment:
+      MYSQL_HOST: mysql_db
+      MYSQL_DATABASE: ideas2it
+      MYSQL_PASSWORD: ideas2it
+      MYSQL_ROOT_PASSWORD: ideas2it
+  mongo:
+    image: 'mongo'
+    ports:
+      - 27017:27017
+    hostname: mongo
+    networks:
+      - healthcare-network
+  redis-server:
+    image: 'redis'
+    ports:
+      - "6379:6379"
+    networks:
+      - healthcare-network
+networks:
+  healthcare-network:
+   driver: bridge
